@@ -1,0 +1,110 @@
+ running on    8 total cores
+ distrk:  each k-point on    2 cores,    4 groups
+ distr:  one band on    1 cores,    2 groups
+ using from now: INCAR     
+ vasp.5.4.4.16052018 (build Dec 07 2020 11:33:42) complex                       
+  
+ POSCAR found type information on POSCAR  Cl Br Pt
+ POSCAR found :  3 types and       4 ions
+ scaLAPACK will be used
+
+ ----------------------------------------------------------------------------- 
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|      For optimal performance we recommend to set                            |
+|        NCORE= 4 - approx SQRT( number of cores)                             |
+|      NCORE specifies how many cores store one orbital (NPAR=cpu/NCORE).     |
+|      This setting can  greatly improve the performance of VASP for DFT.     |
+|      The default,   NCORE=1            might be grossly inefficient         |
+|      on modern multi-core architectures or massively parallel machines.     |
+|      Do your own testing !!!!                                               |
+|      Unfortunately you need to use the default for GW and RPA calculations. |
+|      (for HF NCORE is supported but not extensively tested yet)             |
+|                                                                             |
+ ----------------------------------------------------------------------------- 
+
+
+ ----------------------------------------------------------------------------- 
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|      You have enabled k-point parallelism (KPAR>1).                         |
+|      This developmental code was originally  written by Paul Kent at ORNL,  |
+|      and carefully double checked in Vienna.                                |
+|      GW as well as linear response parallelism added by Martijn Marsman     |
+|      and Georg Kresse.                                                      |
+|      Carefully verify results versus KPAR=1.                                |
+|      Report problems to Paul Kent and Vienna.                               |
+|                                                                             |
+ ----------------------------------------------------------------------------- 
+
+ LDA part: xc-table for Pade appr. of Perdew
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ...
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.223521541965E+03    0.22352E+03   -0.10121E+04   704   0.799E+02
+DAV:   2     0.288538366814E+01   -0.22064E+03   -0.21218E+03  1040   0.205E+02
+DAV:   3    -0.170528522943E+02   -0.19938E+02   -0.19605E+02   868   0.700E+01
+DAV:   4    -0.174701064190E+02   -0.41725E+00   -0.41622E+00   882   0.115E+01
+DAV:   5    -0.174797774854E+02   -0.96711E-02   -0.96691E-02   894   0.168E+00    0.154E+01
+DAV:   6    -0.166165520826E+02    0.86323E+00   -0.24031E+00   872   0.136E+01    0.868E+00
+DAV:   7    -0.166238153593E+02   -0.72633E-02   -0.55221E-01   800   0.778E+00    0.320E+00
+DAV:   8    -0.166856094968E+02   -0.61794E-01   -0.44448E-01   848   0.962E+00    0.261E+00
+DAV:   9    -0.165682796793E+02    0.11733E+00   -0.16758E-01   824   0.572E+00    0.424E-01
+DAV:  10    -0.165674749194E+02    0.80476E-03   -0.25833E-02   810   0.102E+00    0.145E-01
+DAV:  11    -0.165673856726E+02    0.89247E-04   -0.19816E-03   824   0.385E-01    0.813E-02
+DAV:  12    -0.165674166604E+02   -0.30988E-04   -0.18791E-04   802   0.973E-02
+   1 F= -.17795802E+02 E0= -.17795802E+02  d E =-.177958E+02
+stress tensor set to zero in row and column 2
+stress tensor set to zero in row and column 3
+ BRION: g(F)=  0.175E-02 g(S)=  0.221E-02
+ bond charge predicted
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.165721752835E+02   -0.47896E-02   -0.61695E-01   704   0.482E+00    0.624E-01
+DAV:   2    -0.165657646417E+02    0.64106E-02   -0.26428E-02   866   0.124E+00    0.276E-01
+DAV:   3    -0.165647621170E+02    0.10025E-02   -0.24141E-03   824   0.513E-01    0.187E-01
+DAV:   4    -0.165646267751E+02    0.13534E-03   -0.19364E-03   806   0.608E-01    0.156E-01
+DAV:   5    -0.165643673141E+02    0.25946E-03   -0.71288E-04   794   0.311E-01    0.561E-02
+DAV:   6    -0.165643843971E+02   -0.17083E-04   -0.12221E-04   654   0.690E-02
+   2 F= -.17797371E+02 E0= -.17797371E+02  d E =-.156884E-02
+stress tensor set to zero in row and column 2
+stress tensor set to zero in row and column 3
+ BRION: g(F)=  0.839E-03 g(S)=  0.701E-03 retain N=  1 mean eig= 0.64
+ eig:   0.640
+ bond charge predicted
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.165675189933E+02   -0.31517E-02   -0.93629E-02   704   0.186E+00    0.218E-01
+DAV:   2    -0.165666836269E+02    0.83537E-03   -0.41711E-03   872   0.488E-01    0.938E-02
+DAV:   3    -0.165665550187E+02    0.12861E-03   -0.28472E-04   854   0.168E-01    0.625E-02
+DAV:   4    -0.165665420895E+02    0.12929E-04   -0.23678E-04   722   0.210E-01
+   3 F= -.17798069E+02 E0= -.17798069E+02  d E =-.697888E-03
+stress tensor set to zero in row and column 2
+stress tensor set to zero in row and column 3
+ BRION: g(F)=  0.450E-03 g(S)=  0.157E-03 retain N=  1 mean eig= 1.23
+ eig:   1.235
+ bond charge predicted
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.165683076986E+02   -0.17527E-02   -0.11778E-01   776   0.199E+00    0.195E-01
+DAV:   2    -0.165679581968E+02    0.34950E-03   -0.49976E-03   842   0.482E-01    0.777E-02
+DAV:   3    -0.165678660087E+02    0.92188E-04   -0.19220E-04   856   0.121E-01    0.506E-02
+DAV:   4    -0.165678646684E+02    0.13402E-05   -0.13812E-04   696   0.152E-01
+   4 F= -.17798406E+02 E0= -.17798406E+02  d E =-.337275E-03
+stress tensor set to zero in row and column 2
+stress tensor set to zero in row and column 3
+ BRION: g(F)=  0.341E-03 g(S)=  0.143E-04 retain N=  1 mean eig= 0.90
+ eig:   0.896
+ reached required accuracy - stopping structural energy minimisation
+ writing wavefunctions

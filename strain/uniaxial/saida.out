@@ -1,0 +1,56 @@
+
+####################################################################
+#    Written by Danilo de P. Kuritza <danilokuritza@gmail.com>     #
+#    Last updated on, Dec-10-2020                                  #
+#                                                                  #
+#    This script was created in order to calculate the strain      #
+#    (X and Y directions) in 2D materials. To work, copy the       #
+#    POTCAR and POSCAR files of the desired material in the        #
+#    same directory as ./strain.sh/.                               #
+#                                                                  #
+#    How to run: nohup bash strain.sh > saida.out 2> job.err &     #
+#                                                                  #
+#    WARNING: If possible, install ssmtp via apt install before    #
+#    runing the script!                                            #
+####################################################################
+
+Checking POSCAR and POTCAR files:
+POSCAR OK!
+POTCAR OK!
+
+Files are OK! Moving on...
+
+x.dat already exists! Appending data...
+
+Running -1.00% x-strain...
+time: 53 s
+
+Running -0.50% x-strain...
+time: 79 s
+
+Running 0.00% x-strain...
+time: 100 s
+
+Running 0.50% x-strain...
+time: 122 s
+
+Running 1.00% x-strain...
+time: 159 s
+
+Running -1.00% y-strain...
+time: 193 s
+
+Running -0.50% y-strain...
+time: 222 s
+
+Running 0.00% y-strain...
+time: 245 s
+
+Running 0.50% y-strain...
+time: 269 s
+
+Running 1.00% y-strain...
+time: 308 s
+
+
+This is the end my friend!
