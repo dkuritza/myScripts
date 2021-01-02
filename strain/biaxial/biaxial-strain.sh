@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Written by Danilo de P. Kuritza <danilokuritza@gmail.com>
-# Last updated on, Dec-17-2020
+# Last updated on, Dec-18-2020
 
 export LANG="en_US"
 export LC_NUMERIC="en_US.UTF-8"
