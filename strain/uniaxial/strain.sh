@@ -29,25 +29,25 @@ set -o nounset
 EMAIL="danilokuritza@gmail.com"        # User e-mail
 MACHINE=`hostname`                     # Current machine
 CDIR=`pwd`                             # Current directory
-FLAG_MAIL="true"                       # true (send email) | false (don't send email)
+FLAG_MAIL="false"                      # true (send email) | false (don't send email)
 
 ### VASP setup ###
-VASP_DIR=~/Tools/VASP/5.4.4/bin/
+VASP_DIR=~/Codigos/vasp/5.4.4/bin/
 OUTPUT="job"                           # Output file name
 NPROC="8"                              # Number of cores
 NPAR="2"                               # Sets the NPAR number in INCAR file
 KPAR="4"                               # Sets the KPAR number in INCAR file
-KP="4"                                 # KPOINTS (Do not use large numbers if FHYB=true!) 
-ENCUT="300"                            # Cutoff energy (eV)
+KP="8"                                 # KPOINTS (Do not use large numbers if FHYB=true!) 
+ENCUT="500"                            # Cutoff energy (eV)
 FHYB="false"                           # Hybrid functionals (HSE06): true | false
 VDWT="11"                              # vdW correction tag: 11 (DFT-D3 Zero) | 12 (DFT-D3 BJ) | 20 (TS) | 0 (OFF)
 VDWSCS=".FALSE."                       # Self-consistent screening (use only if VDWT=20 !): .TRUE. | .FALSE.
 
 ### Strain setup ###
-STEP="0.50"                            # Step used in the strain
-NMIN="-2.00"                           # initial %
-NMAX="-1.50"                            # final %
-DIRECTION="y"                        # x | y
+STEP="0.25"                            # Step used in the strain
+NMIN="-5.50"                           # initial %
+NMAX="-0.50"                           # final %
+DIRECTION="x y"                        # x | y
 
 ################################
 #    User Defined Functions    #
@@ -81,10 +81,10 @@ ALGO        = ${ALG}
 ISIF        = 3
 IBRION      = 1
 ISYM        = ${ISY}
-SYMPREC     = 1.0e-09
-NSW         = 100
-EDIFF       = 0.5e-04
-EDIFG       = -1.0e-02
+SYMPREC     = 1.0e-10
+NSW         = 200
+EDIFF       = 0.5e-06
+EDIFG       = -1.0e-03
 IVDW        = ${VDWT}
 LVDWSCS     = ${VDWSCS}
 LHFCALC     = ${LHF}
@@ -155,12 +155,12 @@ gap_grabb (){
   nkpt=`awk '/NKPTS/ {print $4}' OUTCAR`
   e1=`grep "     ${homo}     " OUTCAR | head -${nkpt} | sort -n -k 2 | tail -1 | awk '{print $2}'`
   e2=`grep "     ${lumo}     " OUTCAR | head -${nkpt} | sort -n -k 2 | head -1 | awk '{print $2}'`
-  if [ 1 -eq "$(echo "${e1} >= 0" | bc)" ]; then
-    gap=`echo "sqrt(${e2}^2) - sqrt(${e1}^2)" | bc`
-  elif [ 1 -eq "$(echo "${e2} <= 0" | bc)" ]; then
+  if [ 1 -eq "$(echo "${e2} >= 0" | bc)" ]; then
     gap=`echo "sqrt(${e1}^2) - sqrt(${e2}^2)" | bc`
+  elif [ 1 -eq "$(echo "${e1} <= 0" | bc)" ]; then
+    gap=`echo "sqrt(${e2}^2) - sqrt(${e1}^2)" | bc`
   else
-    gap=`echo "sqrt(${e1}^2) + sqrt(${e2}^2)" | bc`
+    gap=`echo "sqrt(${e1} + sqrt(${e2}^2)" | bc`
   fi
 }
 
@@ -202,7 +202,6 @@ error_exit(){
 printf "
 ####################################################################
 #    Written by Danilo de P. Kuritza <danilokuritza@gmail.com>     #
-#    Last updated on, Dec-10-2020                                  #
 #                                                                  #
 #    This script was created in order to calculate the strain      #
 #    (X and Y directions) in 2D materials. To work, copy the       #
