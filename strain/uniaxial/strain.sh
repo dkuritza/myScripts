@@ -155,12 +155,12 @@ gap_grabb (){
   nkpt=`awk '/NKPTS/ {print $4}' OUTCAR`
   e1=`grep "     ${homo}     " OUTCAR | head -${nkpt} | sort -n -k 2 | tail -1 | awk '{print $2}'`
   e2=`grep "     ${lumo}     " OUTCAR | head -${nkpt} | sort -n -k 2 | head -1 | awk '{print $2}'`
-  if [ 1 -eq "$(echo "${e2} >= 0" | bc)" ]; then
-    gap=`echo "sqrt(${e1}^2) - sqrt(${e2}^2)" | bc`
-  elif [ 1 -eq "$(echo "${e1} <= 0" | bc)" ]; then
+  if [ 1 -eq "$(echo "${e1} >= 0" | bc)" ]; then
     gap=`echo "sqrt(${e2}^2) - sqrt(${e1}^2)" | bc`
+  elif [ 1 -eq "$(echo "${e2} <= 0" | bc)" ]; then
+    gap=`echo "sqrt(${e1}^2) - sqrt(${e2}^2)" | bc`
   else
-    gap=`echo "sqrt(${e1} + sqrt(${e2}^2)" | bc`
+    gap=`echo "sqrt(${e2} + sqrt(${e1}^2)" | bc`
   fi
 }
 
