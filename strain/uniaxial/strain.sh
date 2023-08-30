@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Written by Danilo de P. Kuritza <danilokuritza@gmail.com>
-# Last updated on, Dec-17-2020
+# Last updated on, Jan-20-2020
 
 export LANG="en_US"
 export LC_NUMERIC="en_US.UTF-8"
@@ -29,25 +29,27 @@ set -o nounset
 EMAIL="danilokuritza@gmail.com"        # User e-mail
 MACHINE=`hostname`                     # Current machine
 CDIR=`pwd`                             # Current directory
-FLAG_MAIL="true"                       # true (send email) | false (don't send email)
+FLAG_MAIL="false"                      # true (send email) | false (don't send email)
 
 ### VASP setup ###
-VASP_DIR=~/Tools/VASP/5.4.4/bin/
+VASP_DIR=~/Codigos/vasp/5.4.4/bin/
 OUTPUT="job"                           # Output file name
 NPROC="8"                              # Number of cores
 NPAR="2"                               # Sets the NPAR number in INCAR file
 KPAR="4"                               # Sets the KPAR number in INCAR file
-KP="4"                                 # KPOINTS (Do not use large numbers if FHYB=true!) 
-ENCUT="300"                            # Cutoff energy (eV)
+NBANDS="24"                            # Number of bands
+KP="8"                                 # KPOINTS (Do not use large numbers if FHYB=true!) 
+ENCUT="500"                            # Cutoff energy (eV)
 FHYB="false"                           # Hybrid functionals (HSE06): true | false
 VDWT="11"                              # vdW correction tag: 11 (DFT-D3 Zero) | 12 (DFT-D3 BJ) | 20 (TS) | 0 (OFF)
 VDWSCS=".FALSE."                       # Self-consistent screening (use only if VDWT=20 !): .TRUE. | .FALSE.
+LDIPOL=".FALSE."                       # Dipole corrections: .TRUE. | .FALSE.
 
 ### Strain setup ###
-STEP="0.50"                            # Step used in the strain
-NMIN="-2.00"                           # initial %
-NMAX="-1.50"                            # final %
-DIRECTION="y"                        # x | y
+STEP="0.5"                            # Step used in the strain
+NMIN="-1.0"                           # initial %
+NMAX="1.0"                            # final %
+DIRECTION="x y"                       # x | y
 
 ################################
 #    User Defined Functions    #
@@ -60,14 +62,14 @@ if [ ${FHYB} = true ]; then
   AEX="0.25"
   HFS="0.2"
   ALG="All"
-  ISY="-1"
+  ISY="0"
 else
   LHF=".FALSE."
   PRE="N"
   AEX="0"
   HFS="0.0"
   ALG="Normal"
-  ISY="-1"
+  ISY="0"
 fi
 
 cat > INCAR <<EOF 
@@ -79,19 +81,20 @@ ISMEAR      = 0
 SIGMA       = 0.1
 ALGO        = ${ALG}
 ISIF        = 3
-IBRION      = 1
+IBRION      = 2
 ISYM        = ${ISY}
-SYMPREC     = 1.0e-09
-NSW         = 100
-EDIFF       = 0.5e-04
-EDIFG       = -1.0e-02
+SYMPREC     = 1.0e-10
+NSW         = 200
+NBANDS      = ${NBANDS}
+EDIFF       = 0.5e-06
+EDIFG       = -1.0e-03
 IVDW        = ${VDWT}
 LVDWSCS     = ${VDWSCS}
 LHFCALC     = ${LHF}
 PRECFOCK    = ${PRE}
 AEXX        = ${AEX}
 HFSCREEN    = ${HFS}
-LDIPOL      = .TRUE.
+LDIPOL      = ${LDIPOL}
 IDIPOL      = 3
 NPAR        = ${NPAR}
 KPAR        = ${KPAR}
@@ -160,7 +163,7 @@ gap_grabb (){
   elif [ 1 -eq "$(echo "${e2} <= 0" | bc)" ]; then
     gap=`echo "sqrt(${e1}^2) - sqrt(${e2}^2)" | bc`
   else
-    gap=`echo "sqrt(${e1}^2) + sqrt(${e2}^2)" | bc`
+    gap=`echo "sqrt(${e2} + sqrt(${e1}^2)" | bc`
   fi
 }
 
@@ -202,7 +205,6 @@ error_exit(){
 printf "
 ####################################################################
 #    Written by Danilo de P. Kuritza <danilokuritza@gmail.com>     #
-#    Last updated on, Dec-10-2020                                  #
 #                                                                  #
 #    This script was created in order to calculate the strain      #
 #    (X and Y directions) in 2D materials. To work, copy the       #
